@@ -65,11 +65,12 @@ exports.deleteLockers = async function (req, res) {
       return res.send(errResponse(baseResponse.NOT_ADMIN));
     }
     // 삭제수행
-    const deleteLockersResult = nemoService.deleteLockers(getAdmin.department);
-    if (typeof deleteLockersResult === undefined) {
+    const deleteLockersResult = await nemoService.deleteLockers(getAdmin.department);
+
+    if (typeof deleteLockersResult === undefined || deleteLockersResult.isSuccess === false) {
       return res.send(errResponse(baseResponse.LOCKER_DELETE_FAILED));
     }
-    return res.send(response(deleteLockersResult));
+    return res.send(response(baseResponse.SUCCESS));
   } catch (error) {
     console.error(`NemoController - deleteLockers error: ${error}`);
     return res.send(errResponse(baseResponse.SERVER_ERROR));

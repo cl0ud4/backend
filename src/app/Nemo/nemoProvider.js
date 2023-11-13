@@ -60,9 +60,10 @@ exports.emptyCheck = async function (department) {
   connection.release();
 
   const lockerCount = row * col;
-
   for (let i = 0; i < lockerCount; i++) {
-    if (lockerListResult[i].status !== "empty") return false;
+    // 사물함이 단 하나라도 대여신청, 반납신청, 사용중이면 비어있지 않다
+    if (lockerListResult[i].status === "request" || lockerListResult[i].status === "return" || lockerListResult[i].status === "using")
+      return false;
   }
   return true;
 };
