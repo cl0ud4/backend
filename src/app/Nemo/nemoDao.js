@@ -90,21 +90,30 @@ async function selectLockerByUserId(connection, lockerRentCheckParams) {
 
 // 모든 사물함 삭제
 async function deleteLockers(connection, department) {
-  const deleteLockersQeury = `
-    DELETE
-    FROM locker
-    WHERE fk_department = ?;
-  `;
-  await connection.query(deleteLockersQeury, department);
+  try {
+    await connection.beginTransaction();  //트랜잭션 적용
+    const deleteLockersQeury = `
+      DELETE
+      FROM locker
+      WHERE fk_department = ?;
+    `;
+    await connection.query(deleteLockersQeury, department);
+    const deleteLockersInfoQeury = `
+      DELETE
+      FROM lockers_info
+      WHERE fk_department = ?;
+    `;
+    const deleteLockersInfoRow = await connection.query(deleteLockersInfoQeury, department);
+    
+    await connection.commit();
+    return deleteLockersInfoRow;
 
-  const deleteLockersInfoQeury = `
-    DELETE
-    FROM lockers_info
-    WHERE fk_department = ?;
-  `;
-  const deleteLockersInfoRow = await connection.query(deleteLockersInfoQeury, department);
+  } catch(err){
+    connection.rollback();
 
-  return deleteLockersInfoRow;
+  } finally {
+    connection.release();
+  }
 }
 
 // 사물함 1개 생성
