@@ -11,7 +11,7 @@ pipeline {
 		stage("Build image") {
 			steps {
 				script {
-					nemoserver = docker.build("listenyoon/nemo:${env.BUILD_ID})
+					nemoserver = docker.build("listenyoon/nemo:${env.BUILD_ID}")
 				}
 
 			}
