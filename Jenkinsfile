@@ -4,7 +4,7 @@ pipeline {
 		PROJECT_ID='cloud-401704'
 		CLUSTER_NAME='k8s'
 		LOCATION='asia-northeast3-a'
-		CREDENTIALS_ID='nemo-gke'
+		CREDENTIALS_ID='cloud-401704'
 		BUILD_ID='0.1'
 	}
 	stages {
@@ -33,7 +33,7 @@ pipeline {
 	    		steps{
 				sh "sed -i 's/nemo:latest/nemo:${env.BUILD_ID}/g' server.yml"
 				step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, 
-				location: env.LOCATION, manifestPattern: 'server.yaml', credentialsId: env.CREDENTIALS_ID])
+				location: env.LOCATION, manifestPattern: 'server.yml', credentialsId: env.CREDENTIALS_ID])
 	    		}
 		}
 	}
