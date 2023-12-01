@@ -4,7 +4,7 @@ const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 
 // secret_sms가 ignore파일에 있어서 인증번호 서비스 필요시 연락바람!
-const secret_key = require("../../../config/secret_sms.js");
+// const secret_key = require("../../../config/secret_sms.js");
 
 // 인증번호 사용시 밑에 3가지 install 필요
 const axios = require("axios");
@@ -271,9 +271,9 @@ exports.send = async function (req, res) {
   }
 
   let date = Date.now().toString();
-  const uri = secret_key.NCP_serviceID;
-  const secretKey = secret_key.NCP_secretKey;
-  const accessKey = secret_key.NCP_accessKEY;
+  const uri = process.env.SMS_NCP_serviceID;
+  const secretKey = process.env.SMS_NCP_secretKey;
+  const accessKey = process.env.SMS_NCP_accessKEY;
   const method = "POST";
   const space = " ";
   const newLine = "\n";
@@ -309,7 +309,7 @@ exports.send = async function (req, res) {
       type: "SMS",
       contentType: "COMM",
       countryCode: "82",
-      from: secret_key.MASTER_PHONE,
+      from: process.env.SMS_MASTER_PHONE,
       content: `${smsContent[0].sms_content}`,
       messages: phones, // admin과 같은 학과인 phoneList
     },

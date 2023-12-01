@@ -5,7 +5,7 @@ const userDao = require("./userDao");
 const baseResponse = require("../../../config/baseResponseStatus");
 const { response } = require("../../../config/response");
 const { errResponse } = require("../../../config/response");
-const secret_config = require("../../../config/secret");
+//const secret_config = require("../../../config/secret");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
@@ -59,7 +59,7 @@ exports.userSignIn = async function (userid, password) {
       {
         userid: userid,
       }, // 토큰의 내용(payload)
-      secret_config.jwtsecret, // 비밀 키
+      process.env.JWT_SECRET, // 비밀 키
       {
         expiresIn: "365d",
         subject: "userid",
@@ -91,7 +91,7 @@ exports.adminSignIn = async function (userid, password) {
       {
         userid: userid,
       }, // 토큰의 내용(payload)
-      secret_config.jwtsecret, // 비밀 키
+      process.env.JWT_SECRET, // 비밀 키
       {
         expiresIn: "365d",
         subject: "userid",
@@ -121,7 +121,7 @@ exports.signIn = async function (userid, password) {
       {
         userid: userid,
       }, // 토큰의 내용(payload)
-      secret_config.jwtsecret, // 비밀 키
+ 	process.env.JWT_SECRET, // 비밀 키
       {
         expiresIn: "365d",
         subject: "userid",

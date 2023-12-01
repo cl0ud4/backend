@@ -5,8 +5,8 @@ const userDao = require("../../app/User/userDao");
 const nemoProvider = require("../../app/Nemo/nemoProvider");
 const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
-const mailAuth_config = require("../../../config/mailAuth");
-const mailAuth = require("../../../config/mailAuth");
+//const mailAuth_config = require("../../../config/mailAuth");
+//const mailAuth = require("../../../config/mailAuth");
 
 let verifyArr = [];
 
@@ -226,8 +226,8 @@ exports.postMailSend = async function (req, res) {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: mailAuth_config.user,
-      pass: mailAuth_config.pass,
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD,
     },
   });
   const authenticationNumber = generateRandomnumber(studentId);
@@ -235,7 +235,7 @@ exports.postMailSend = async function (req, res) {
   let mailText = `[네모의 꿈] 회원가입 인증번호가 발송되었습니다 <br/><h1>${authenticationNumber}</h1>`;
   await transporter
     .sendMail({
-      from: mailAuth_config.user,
+      from: process.env.MAIL_USER,
       to: studentId + "@sungshin.ac.kr",
       subject: "네모의 꿈 회원가입 인증번호",
       html: mailText,

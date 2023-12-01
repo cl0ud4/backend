@@ -18,3 +18,5 @@ config/mailAuth.js
 .DS_Store
 
 .prettierignore
+.env
+secret.yml
