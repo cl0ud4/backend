@@ -4,7 +4,7 @@ pipeline {
 		PROJECT_ID='cloud-401704'
 		CLUSTER_NAME='k8s'
 		LOCATION='asia-northeast3-a'
-		CREDENTIALS_ID='nemo-gke'
+		CREDENTIALS_ID='NemoServerApp'
 		BUILD_ID='0.1'
 	}
 	stages {
