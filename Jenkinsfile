@@ -4,7 +4,7 @@ pipeline {
 		PROJECT_ID='cloud-401704'
 		CLUSTER_NAME='k8s'
 		LOCATION='asia-northeast3-a'
-		CREDENTIALS_ID='cloud-401704'
+		CREDENTIALS_ID='5dd4180a-29ca-4455-a82b-2fbe61b5402c'
 		BUILD_ID='0.1'
 	}
 	stages {
