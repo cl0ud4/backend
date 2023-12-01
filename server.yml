@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nemo-server
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-server
+  template:
+    metadata:
+      labels:
+        app: web-server
+    spec:
+      containers:
+        - name: server
+          image: listenyoon/nemo:0.3
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret ## 시크릿명
+                  key: db_host ## 시크릿 키
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: db_user
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: db_port
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: db_password
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: db_database
+            - name: MAIL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: mail_user
+            - name: MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: mail_password
+            - name: SMS_NCP_serviceID
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: sms_ncp_serviceid
+            - name: SMS_NCP_accessKEY
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: sms_ncp_accesskey
+            - name: SMS_NCP_secretKEY
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: sms_ncp_secretkey
+            - name: SMS_MASTER_PHONE
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: sms_master_phone
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: server-secret
+                  key: jwt_secret
+
