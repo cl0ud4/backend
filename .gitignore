@@ -11,7 +11,7 @@ node_modules
 package-lock.json
 
 config/secret_sms.js
-config/database.js
+#config/database.js
 config/secret.js
 config/mailAuth.js
 
