@@ -33,7 +33,6 @@
     "cookie": "^0.5.0",
     "cookie-signature": "^1.0.6",
     "cors": "^2.8.5",
-    "crypto": "^1.0.1",
     "crypto-js": "^4.1.1",
     "debug": "^2.6.9",
     "denque": "^2.1.0",
