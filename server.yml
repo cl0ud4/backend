@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: listenyoon/nemo:0.3
+          image: listenyoon/nemo:0.4
           env:
             - name: DB_HOST
               valueFrom:

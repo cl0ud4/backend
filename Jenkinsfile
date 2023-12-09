@@ -5,7 +5,7 @@ pipeline {
 		CLUSTER_NAME='k8s'
 		LOCATION='asia-northeast3-a'
 		CREDENTIALS_ID='5dd4180a-29ca-4455-a82b-2fbe61b5402c'
-		BUILD_ID='0.3'
+		BUILD_ID='0.4'
 	}
 	stages {
 		stage("Build image") {
@@ -27,9 +27,9 @@ pipeline {
             		}
         	}
 		stage('Deploy to GKE') {
-	   //  		when {
-				// branch 'main'
-	   //  		}
+	     		when {
+				branch 'main'
+	     		}
 	    		steps{
 				sh "sed -i 's/nemo:latest/nemo:${env.BUILD_ID}/g' server.yml"
 				step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, 
