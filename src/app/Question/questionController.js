@@ -272,7 +272,7 @@ exports.send = async function (req, res) {
 
   let date = Date.now().toString();
   const uri = process.env.SMS_NCP_serviceID;
-  const secretKey = process.env.SMS_NCP_secretKey;
+  const secretKey = process.env.SMS_NCP_secretKEY;
   const accessKey = process.env.SMS_NCP_accessKEY;
   const method = "POST";
   const space = " ";
