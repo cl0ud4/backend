@@ -21,13 +21,13 @@ spec:
                   cpu: 200m
           readinessProbe:
               httpGet:
-                  path: /ready
+                  path: /nemo/test
                   port: 4000 
               initialDelaySeconds: 15
               periodSeconds: 6
           livenessProbe:
               httpGet:
-                  path: /healthz
+                  path: /nemo/ready
                   port: 4000
               initialDelaySeconds: 10
               periodSeconds: 10
