@@ -4,7 +4,7 @@ metadata:
   name: nemo-server
   namespace: default
 spec:
-  replicas: 1 
+  replicas: 3 
   selector:
     matchLabels:
       app: web-server
@@ -13,6 +13,7 @@ spec:
       labels:
         app: web-server
     spec:
+      terminationGracePeriodSeconds: 20 
       containers:
         - name: server
           image: listenyoon/nemo:0.4
@@ -27,10 +28,11 @@ spec:
               periodSeconds: 6
           livenessProbe:
               httpGet:
-                  path: /nemo/ready
+                  path: /nemo/test
                   port: 4000
-              initialDelaySeconds: 10
+              initialDelaySeconds: 20
               periodSeconds: 10
+              terminationGracePeriodSeconds: 5
           env:
             - name: DB_HOST
               valueFrom:
