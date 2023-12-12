@@ -20,6 +20,12 @@ module.exports = function () {
   app.use(cors());
   // app.use(express.static(process.cwd() + '/public'));
 
+  require("../src/app/User/userRoute")(app);
+  require("../src/app/Nemo/nemoRoute")(app);
+  // require('../src/app/Board/boardRoute')(app);
+  // require("../src/app/Test/testRoute")(app);
+  require("../src/app/Question/questionRoute")(app);
+
   app.get('/healthz', function(request, response) {
 	  let code = 200;
 	  console.log("in health");
@@ -31,12 +37,6 @@ module.exports = function () {
 	  console.log("in ready");
 	  response.status(code).send('OK');
   });
-
-  require("../src/app/User/userRoute")(app);
-  require("../src/app/Nemo/nemoRoute")(app);
-  // require('../src/app/Board/boardRoute')(app);
-  // require("../src/app/Test/testRoute")(app);
-  require("../src/app/Question/questionRoute")(app);
 
   return app;
 };
