@@ -25,7 +25,7 @@ exports.getTest = async function (req, res) {
   return res.send(response(baseResponse.SUCCESS, selectUserInfoResult[0]));
 };
 
-exports.getReady = async function (req, res) {
+exports.getReady = function (req, res) {
   return res.send(response(baseResponse.SUCCESS));
 }
 
