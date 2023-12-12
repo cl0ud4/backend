@@ -1,25 +1,10 @@
-apiVersion: v1
-kind: Service
-metadata:
-        name: nemo-service
-spec:
-        selector:
-                app: web-server
-        ports:
-                - protocol: TCP
-                  port: 80
-                  targetPort: 4000
-        type: LoadBalancer
-
----
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nemo-server
   namespace: default
 spec:
-  replicas: 1
+  replicas: 1 
   selector:
     matchLabels:
       app: web-server
@@ -31,6 +16,21 @@ spec:
       containers:
         - name: server
           image: listenyoon/nemo:0.4
+          resources:
+              requests:
+                  cpu: 200m
+          readinessProbe:
+              httpGet:
+                  path: /ready
+                  port: 4000 
+              initialDelaySeconds: 15
+              periodSeconds: 6
+          livenessProbe:
+              httpGet:
+                  path: /healthz
+                  port: 4000
+              initialDelaySeconds: 10
+              periodSeconds: 10
           env:
             - name: DB_HOST
               valueFrom:

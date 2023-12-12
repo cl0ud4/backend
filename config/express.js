@@ -20,6 +20,16 @@ module.exports = function () {
   app.use(cors());
   // app.use(express.static(process.cwd() + '/public'));
 
+  app.get('/healthz', function(request, response) {
+	  let code = 200;
+	  response.status(code).send('OK');
+  });
+
+  app.get('/ready', function(request, response) {
+	  let code = 200;
+	  response.status(code).send('OK');
+  });
+
   require("../src/app/User/userRoute")(app);
   require("../src/app/Nemo/nemoRoute")(app);
   // require('../src/app/Board/boardRoute')(app);
