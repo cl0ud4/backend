@@ -3,6 +3,7 @@ module.exports = function (app) {
   const jwtMiddleware = require("../../../config/jwtMiddleware");
   // 0. 테스트 API
   app.get("/nemo/test", nemo.getTest);
+  app.get("/nemo/ready", nemo.getReady);
 
   // 1. 학과 내 모든 사물함 전체 조회 API
   app.get("/nemo/lockers", nemo.getLockers);

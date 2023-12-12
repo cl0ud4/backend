@@ -25,6 +25,10 @@ exports.getTest = async function (req, res) {
   return res.send(response(baseResponse.SUCCESS, selectUserInfoResult[0]));
 };
 
+exports.getReady = async function (req, res) {
+  return res.send(response(baseResponse.SUCCESS));
+}
+
 /**
  * API No. 1
  * API Name : 1. 학과 내 모든 사물함 전체 조회 API
