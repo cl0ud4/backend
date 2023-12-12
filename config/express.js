@@ -22,11 +22,13 @@ module.exports = function () {
 
   app.get('/healthz', function(request, response) {
 	  let code = 200;
+	  console.log("in health");
 	  response.status(code).send('OK');
   });
 
   app.get('/ready', function(request, response) {
 	  let code = 200;
+	  console.log("in ready");
 	  response.status(code).send('OK');
   });
 
